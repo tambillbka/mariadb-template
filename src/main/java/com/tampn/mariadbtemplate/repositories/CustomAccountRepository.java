@@ -8,5 +8,5 @@ import java.util.List;
 @Repository
 public interface CustomAccountRepository {
 
-    public List<Account> listByCodeOrName(String code, String name);
+    public List<Account> listByCodeOrName(String code, String name, int page, int size);
 }
