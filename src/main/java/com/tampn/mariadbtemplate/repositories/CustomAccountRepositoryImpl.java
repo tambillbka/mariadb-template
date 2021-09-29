@@ -36,19 +36,19 @@ public class CustomAccountRepositoryImpl implements CustomAccountRepository {
 
         // Add predicate
         if (Strings.isNotBlank(code)) {
-            Predicate codePredicate = criteriaBuilder.equal(root.get("code"), code);
+            Predicate codePredicate = criteriaBuilder.like(root.get("code"), "%".concat(code).concat("%"));
             predicates.add(codePredicate);
         }
 
         if (Strings.isNotBlank(name)) {
-            Predicate namePredicate = criteriaBuilder.equal(root.get("name"), name);
+            Predicate namePredicate = criteriaBuilder.like(root.get("name"), "%".concat(name).concat("%"));
             predicates.add(namePredicate);
         }
         // Add criteria
         criteriaQuery.where(predicates.toArray(new Predicate[0]));
 
         // Add order
-        criteriaQuery.orderBy(criteriaBuilder.asc(root.get(code)));
+        criteriaQuery.orderBy(criteriaBuilder.asc(root.get("code")));
 
         // Create query
         TypedQuery<Account> query = entityManager.createQuery(criteriaQuery);
